@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const count = ref(0)
-
+import { shallowReactive } from "vue";
+const appState = shallowReactive({
+  count: 0,
+  hidden: {
+    count: 0,
+  },
+});
 function inc() {
-  count.value++
+  appState.count++;
+}
+function incHidden() {
+  appState.hidden.count++;
 }
 </script>
 
 <template>
   <h1>Hello, Vue Vapor!</h1>
-  <p>Count: {{ count }}</p>
+  <p>Count: {{ appState.count }}, Hidden Count: {{ appState.hidden.count }}</p>
   <button @click="inc">increase</button>
+  <button @click="incHidden">increase</button>
 </template>
